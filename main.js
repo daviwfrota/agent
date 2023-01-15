@@ -4,10 +4,6 @@ const { SerialPort } = require('serialport');
 const os = require('os');
 const path = require('path');
 
-require('electron-reload')(__dirname, {
-    electron: path.join(__dirname, 'node_modules/.bin/electron.cmd')
-});
-
 let win;
 autoUpdater.autoDownload = false;
 function createWindow() {
