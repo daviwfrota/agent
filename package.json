@@ -13,8 +13,8 @@
     "deploy": "electron-builder build --win --publish always"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/daviwfrota/agent.git"
+    "type": "git",
+    "url": "https://github.com/daviwfrota/agent.git"
   },
   "private": true,
   "dependencies": {
@@ -45,7 +45,7 @@
     "@types/serialport": "^8.0.2",
     "codelyzer": "^5.0.0",
     "electron": "^22.0.2",
-    "electron-builder": "^23.6.0",
+    "electron-builder": "^22.10.5",
     "electron-rebuild": "^3.2.9",
     "electron-reload": "^2.0.0-alpha.1",
     "jasmine-core": "~3.4.0",

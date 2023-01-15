@@ -18,3 +18,28 @@
     </div>
   </div>
 </div>
+
+
+<div>
+  <div class="card-header">
+    <h5 class="card-title">Nova versão disponível</h5>
+  </div>
+  <div class="card-body">
+    <div class="d-flex justify-content-center" *ngIf="updateAvaliable && percentage < 0 && !isFinish">
+      <span>Uma nova versão para este aplicativo está disponível.</span> <br>
+      <strong>Deseja fazer download?</strong>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="updateAvaliable && percentage > 0 && !isFinish">
+      <span>As atualizações estão sendo transferidas, aguarde....<strong>({{percentage}}%)</strong></span>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="updateAvaliable && percentage > 0 && isFinish">
+      <span>As atualizações foram transferidas com sucesso. Reinicie o aplicativo para atualizar.</span>
+    </div>
+  </div>
+  <div class="card-footer d-flex align-items-end align-items-center">
+    <button class="btn-secundary">Cancelar</button>
+    <button class="btn-primary" *ngIf="updateAvaliable && percentage < 0 && !isFinish" (click)="update()">Atualizar</button>
+    <button class="btn-primary" *ngIf="updateAvaliable && percentage > 0 && !isFinish">Atualizando...</button>
+    <button class="btn-primary" *ngIf="updateAvaliable && percentage > 0 && isFinish" (click)="restart()">Reiniciar</button>
+  </div>
+</div>

@@ -7,8 +7,6 @@ const electron = (<any>window).require('electron');
 })
 export class SerialPortService {
     ports = new BehaviorSubject<any[]>([]);
-    constructor() {
-    }
 
     list() {
         electron.ipcRenderer.send('getSerialPort');
