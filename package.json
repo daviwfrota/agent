@@ -1,13 +1,19 @@
 {
   "name": "agent",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "main.js",
   "build": {
     "appId": "com.agent.fotocelula",
     "productName": "Agente de Calibração",
+    "publish": {
+      "provider": "github",
+      "token": "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"
+    },
     "files": [
-      "**/*",
-      "build/**/*"
+      "build/**/*",
+      "!**/node_modules/*",
+      "package.json",
+      "main.js"
     ],
     "directories": {
       "output": "release",
