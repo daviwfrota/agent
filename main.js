@@ -4,6 +4,10 @@ const { SerialPort } = require('serialport');
 const os = require('os');
 const path = require('path');
 
+/*require('electron-reload')(__dirname, {
+    electron: path.join(__dirname, 'node_modules/.bin/electron.cmd')
+});*/
+
 let win;
 autoUpdater.autoDownload = false;
 function createWindow() {
@@ -17,7 +21,11 @@ function createWindow() {
       },
     });
 
-    win.loadFile('dist/agent/index.html');
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
     win.on('closed', function () {
         win = null
     });
