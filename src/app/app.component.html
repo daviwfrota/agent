@@ -1,15 +1,17 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light bg-light border-bottom">
   <div class="container-fluid">
-    <a class="navbar-brand">Nepen</a>
-    <div class="d-flex">
-      <i class="fa-duotone fa-user"></i>     
+    <a class="navbar-brand">
+      <img src="./assets/images/logo.png" alt="">
+    </a>
+    <div class="d-flex align-items-center">  
+      <img width="25" height="25" class="mr-1" src="./assets/images/user.svg" alt="">
       <span>{{user?.username}}</span>
     </div>
   </div>
 </nav>
 
 <div class="content" role="main">
-  <div class="bg-secondary p-1">
+  <div style="margin: 60px auto;" class="bg-secondary.bg-gradient  p-1">
     <div class="d-flex flex-row align-items-center justify-content-center">
       <button class="btn btn-primary">Setar corrente</button>
       <button class="btn btn-primary ms-1">Setar tensão</button>
@@ -20,11 +22,11 @@
 </div>
 
 
-<div id="update">
+<div *ngIf="updateAvaliable" id="update">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Nova versão disponível</h5>
-      <div class="card-text d-flex justify-content-center">
+      <div class="card-text d-flex flex-column justify-content-center">
         <span>Uma nova versão para este aplicativo está disponível.</span> 
         <div></div>
         <strong>Deseja fazer download?</strong>
@@ -33,14 +35,18 @@
         <span>As atualizações estão sendo transferidas, aguarde....<strong>({{percentage}}%)</strong></span>
       </div>
       <div class="card-text d-flex justify-content-center" *ngIf="updateAvaliable && percentage > 0 && isFinish">
-        <span>As atualizações foram transferidas com sucesso. Reinicie o aplicativo para atualizar.</span>
+        <span>As atualizações foram transferidas com sucesso. Reinicie o aplicativo para atualizá-lo.</span>
       </div>
     </div>
     <div class="card-body d-flex align-items-end align-items-center">
-      <button class="btn-secondary">Cancelar</button>
-      <button class="btn-primary" *ngIf="updateAvaliable && percentage < 0 && !isFinish" (click)="update()">Atualizar</button>
-      <button class="btn-primary" *ngIf="updateAvaliable && percentage > 0 && !isFinish">Atualizando...</button>
-      <button class="btn-primary" *ngIf="updateAvaliable && percentage > 0 && isFinish" (click)="restart()">Reiniciar</button>
+      <button class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+      <button class="btn btn-primary" *ngIf="updateAvaliable && percentage < 0 && !isFinish" (click)="update()">Atualizar</button>
+      <button class="btn btn-primary" *ngIf="updateAvaliable && percentage > 0 && !isFinish">Atualizando...</button>
+      <button class="btn btn-primary" *ngIf="updateAvaliable && percentage > 0 && isFinish" (click)="restart()">Reiniciar</button>
     </div>
   </div>
+</div>
+
+<div class="d-flex border-top align-items-center justify-content-center flex-column pt-2 pb-2">
+  <small style="font-size: .666rem;">Agente de Calibração - v{{version}}</small>
 </div>

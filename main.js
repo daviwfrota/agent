@@ -3,10 +3,7 @@ const { autoUpdater } = require('electron-updater')
 const { SerialPort } = require('serialport');
 const os = require('os');
 const path = require('path');
-
-/*require('electron-reload')(__dirname, {
-    electron: path.join(__dirname, 'node_modules/.bin/electron.cmd')
-});*/
+const url = require('url');
 
 let win;
 autoUpdater.autoDownload = false;
@@ -20,20 +17,26 @@ function createWindow() {
         contextIsolation: false
       },
     });
-
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'dist', 'agent', 'index.html'),
+   
+    win.loadURL(url.format({
+        pathname: path.join(__dirname, 'build', 'index.html'),
         protocol: 'file:',
         slashes: true
     }));
+
     win.on('closed', function () {
         win = null
     });
 
-    //win.webContents.openDevTools();
-    win.on('ready-to-show', () => {
-        autoUpdater.checkForUpdatesAndNotify();
-    });
+    if(!app.isPackaged) {
+        win.webContents.openDevTools();
+    }
+
+    if(app.isPackaged) {
+        win.on('ready-to-show', () => {
+            autoUpdater.checkForUpdatesAndNotify();
+        });
+    }
 }
   
 app.whenReady().then(createWindow);
@@ -41,15 +44,12 @@ app.whenReady().then(createWindow);
 
 function getSerialPorts() {
     SerialPort.list().then(res => {
-        console.log("enviou as portas")
-        console.log(res);
         win.webContents.send("receiveSerialPort", res);
     });
 }
 
 function getUserInfo() {
     win.webContents.send("receiveUserInfo", os.userInfo());
-    console.log(os.userInfo());
 }
 
 ipcMain.on("getSerialPort", async () => {

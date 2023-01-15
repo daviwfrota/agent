@@ -2,6 +2,11 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AutoUpdateService } from './share/services/auto-update.service';
 import { SerialPortService } from './share/services/seriaport.service';
 import { UserService } from './share/services/user.service';
+
+export interface UserInfo {
+  username?: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,12 +14,14 @@ import { UserService } from './share/services/user.service';
 })
 export class AppComponent implements OnInit {
   title = 'agent';
-  user = {};
+  user: UserInfo = {};
   ports = [];
 
   updateAvaliable = false;
   percentage = 0;
   isFinish = false;
+
+  version = "0.0.1";
   constructor(
     private readonly _serialPortService: SerialPortService,
     private readonly _userService: UserService,
@@ -22,6 +29,7 @@ export class AppComponent implements OnInit {
     private readonly _autoUpdate: AutoUpdateService) {
 
       this._autoUpdate.updateAvaliable.subscribe(res => {
+        console.log(res);
         this.updateAvaliable = res;
       });
 

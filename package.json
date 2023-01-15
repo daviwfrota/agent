@@ -2,6 +2,18 @@
   "name": "agent",
   "version": "0.0.1",
   "main": "main.js",
+  "build": {
+    "appId": "com.agent.fotocelula",
+    "productName": "Agente de Calibração",
+    "files": [
+      "**/*",
+      "build/**/*"
+    ],
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    }
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,8 +21,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "ng build && electron .",
-    "build": "electron-builder build --win --publish never",
-    "deploy": "electron-builder build --win --publish always"
+    "build": "ng build --prod && electron-builder build --win --publish never",
+    "deploy": "ng build --prod && electron-builder build --win --publish always"
   },
   "repository": {
     "type": "git",
@@ -26,9 +38,9 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@fortawesome/fontawesome-free": "^6.2.1",
     "bootstrap": "^5.2.3",
     "electron-updater": "^5.3.0",
-    "font-awesome": "^4.7.0",
     "rxjs": "~6.4.0",
     "serialport": "^10.5.0",
     "tslib": "^1.10.0",
@@ -47,7 +59,6 @@
     "electron": "^22.0.2",
     "electron-builder": "^22.10.5",
     "electron-rebuild": "^3.2.9",
-    "electron-reload": "^2.0.0-alpha.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
